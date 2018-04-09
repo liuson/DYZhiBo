@@ -11,15 +11,19 @@ import UIKit
 private let kMargin : CGFloat = 10
 private let kNormalItemW : CGFloat = (kScreenW - 3 * kMargin) / 2
 private let kNormalItemH : CGFloat = kNormalItemW * 3 / 4
+private let kPrettyItemH : CGFloat = kNormalItemW * 4 / 3
 
 private let kHeaderViewH : CGFloat = 50
 
 private let kNormalCellID = "kNormalCellID"
 private let kHeaderViewID = "kHeaderViewID"
+private let kPrettyCellID = "kPrettyCellID"
 
 class RecommentController: UIViewController {
 
     //定义属性
+    private lazy var recommendVM : ReCommentViewModel = ReCommentViewModel()
+    
     private lazy var collectionView : UICollectionView = { [unowned self] in
         
         let layout = UICollectionViewFlowLayout()
@@ -37,6 +41,7 @@ class RecommentController: UIViewController {
 //        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: kNormalCellID)
 //        collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kHeaderViewID)
         collectionView.register(UINib(nibName: "CollectionNormalCell", bundle: nil), forCellWithReuseIdentifier: kNormalCellID)
+        collectionView.register(UINib(nibName: "CollectionPrettyCell", bundle: nil), forCellWithReuseIdentifier: kPrettyCellID)
 
         collectionView.register(UINib(nibName: "CollectionHeaderView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kHeaderViewID)
 
@@ -47,12 +52,11 @@ class RecommentController: UIViewController {
     //MARK:- 系统回调函数
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         
         setupUI()
-        
-        collectionView.register(UINib(nibName: "CollectionNormalCell", bundle: nil), forCellWithReuseIdentifier: kNormalCellID)
+        loadData()
+
+//        collectionView.register(UINib(nibName: "CollectionNormalCell", bundle: nil), forCellWithReuseIdentifier: kNormalCellID)
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,8 +80,18 @@ extension RecommentController{
     }
 }
 
+//MRAK:- 请求数据
+extension RecommentController{
+    private func loadData() {
+        //
+        recommendVM.requestData()
+//        NetworkTools.required(.GET, URLString: "http://httpbin.org/get", parameters: ["name":"tom"]) { (result) in
+//            print(result)
+//        }
+    }
+}
 
-extension RecommentController : UICollectionViewDataSource{
+extension RecommentController : UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 12
     }
@@ -90,7 +104,15 @@ extension RecommentController : UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kNormalCellID, for: indexPath)
+        
+        var cell : UICollectionViewCell!
+        
+        if indexPath.section == 1 {
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: kPrettyCellID, for: indexPath)
+        }else{
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: kNormalCellID, for: indexPath)
+        }
+        
 //        cell.backgroundColor = UIColor.red
         return cell
         
@@ -102,7 +124,13 @@ extension RecommentController : UICollectionViewDataSource{
         return headerView
     }
     
-
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
+        if indexPath.section == 1 {
+            return CGSize(width: kNormalItemW, height: kPrettyItemH)
+        }
+        return CGSize(width: kNormalItemW, height: kNormalItemH)
+    }
+    
 }
 
 extension RecommentController : UICollectionViewDelegate{

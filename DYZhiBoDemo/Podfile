@@ -1,0 +1,23 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '8.0'
+# Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+use_frameworks!
+
+target 'DYZhiBoDemo' do
+
+
+  # Pods for DYZhiBoDemo
+
+    pod 'Alamofire'
+
+  target 'DYZhiBoDemoTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'DYZhiBoDemoUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

@@ -42,7 +42,6 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         setupUI()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,19 +75,21 @@ extension HomeViewController{
 //        button.setImage(UIImage(named: "homeLogoIcon"), for: .normal)
 //        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(name: "homeLogoIcon", highImageName: "", size: CGSize.zero)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(name: "logo", highImageName: "homeLogoIcon", size: CGSize.zero)
         
         //构造方法
         let size = CGSize(width: 30, height: 30)
         
-        let historyItem = UIBarButtonItem(name: "home_newGameicon", highImageName: "", size: size)
-//        let searchItem = UIBarButtonItem(name: "home_newSeacrhcon", highImageName: "", size: size)
-        let qrcodeItem = UIBarButtonItem(name: "home_newSaoicon", highImageName: "", size: size)
+        let historyItem = UIBarButtonItem(name: "image_my_history", highImageName: "Image_my_history_click", size: size)
+        let searchItem = UIBarButtonItem(name: "btn_search", highImageName: "btn_searc_higlight", size: size)
+        let qrcodeItem = UIBarButtonItem(name: "Image_scan", highImageName: "Image_scan_click", size: size)
         
-        navigationItem.rightBarButtonItems = [historyItem,qrcodeItem]
+        navigationItem.rightBarButtonItems = [historyItem,searchItem,qrcodeItem]
         
     }
 }
+
+
 
 
 extension HomeViewController : PageTitleViewDelegate{
