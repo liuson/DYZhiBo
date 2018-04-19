@@ -75,6 +75,12 @@
                 <constraint firstAttribute="trailing" secondItem="9nY-ir-cSw" secondAttribute="trailing" id="y0s-2Q-mal"/>
             </constraints>
             <size key="customSize" width="261" height="182"/>
+            <connections>
+                <outlet property="bgImageView" destination="9nY-ir-cSw" id="YT0-uQ-srk"/>
+                <outlet property="nickNameLabel" destination="yHR-sG-ZoF" id="Q72-4D-XDR"/>
+                <outlet property="onlineBtn" destination="HPp-0C-ECh" id="A9Z-5h-a0d"/>
+                <outlet property="roomNameLabel" destination="bQf-a8-IRh" id="4cA-T4-iUq"/>
+            </connections>
             <point key="canvasLocation" x="-17.5" y="-34"/>
         </collectionViewCell>
     </objects>

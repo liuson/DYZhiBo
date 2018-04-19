@@ -9,11 +9,12 @@
 import UIKit
 
 private let kMargin : CGFloat = 10
+private let kHeaderViewH : CGFloat = 50
+
 private let kNormalItemW : CGFloat = (kScreenW - 3 * kMargin) / 2
 private let kNormalItemH : CGFloat = kNormalItemW * 3 / 4
 private let kPrettyItemH : CGFloat = kNormalItemW * 4 / 3
 
-private let kHeaderViewH : CGFloat = 50
 
 private let kNormalCellID = "kNormalCellID"
 private let kHeaderViewID = "kHeaderViewID"
@@ -23,7 +24,8 @@ class RecommentController: UIViewController {
 
     //定义属性
     private lazy var recommendVM : ReCommentViewModel = ReCommentViewModel()
-    
+    var baseVM : BaseViewModel!
+
     private lazy var collectionView : UICollectionView = { [unowned self] in
         
         let layout = UICollectionViewFlowLayout()
@@ -84,7 +86,25 @@ extension RecommentController{
 extension RecommentController{
     private func loadData() {
         //
-        recommendVM.requestData()
+//        baseVM = recommendVM
+        recommendVM.requestData {
+            // 1.展示推荐数据
+            self.collectionView.reloadData()
+            // 2.将数据传递给GameView
+//            var groups = self.recommendVM.anchorGroups
+//            print("groups=",groups)
+            // 2.1.移除前两组数据
+//            groups.removeFirst()
+//            groups.removeFirst()
+            
+            // 2.2.添加更多组
+//            let moreGroup = AnchorGroup()
+//            moreGroup.tag_name = "更多"
+//            groups.append(moreGroup)
+            
+        }
+        
+        
 //        NetworkTools.required(.GET, URLString: "http://httpbin.org/get", parameters: ["name":"tom"]) { (result) in
 //            print(result)
 //        }
@@ -93,34 +113,56 @@ extension RecommentController{
 
 extension RecommentController : UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 12
+        return recommendVM.anchorGroups.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
-            return 8
-        }
-        return 4
+//        if section == 0 {
+//            return 8
+//        }
+//        return 4
+        print(recommendVM.anchorGroups[section].anchors.count)
+
+        return recommendVM.anchorGroups[section].anchors.count
+
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        var cell : UICollectionViewCell!
+//        var cell : UICollectionViewCell!
         
         if indexPath.section == 1 {
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: kPrettyCellID, for: indexPath)
+            // 1.取出PrettyCell
+            let prettyCell = collectionView.dequeueReusableCell(withReuseIdentifier: kPrettyCellID, for: indexPath) as! CollectionPrettyCell
+            
+            // 2.设置数据
+            prettyCell.anchor = recommendVM.anchorGroups[indexPath.section].anchors[indexPath.item]
+            
+            return prettyCell
+            
         }else{
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: kNormalCellID, for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kNormalCellID, for: indexPath) as! CollectionNormalCell
+            cell.anchor = recommendVM.anchorGroups[indexPath.section].anchors[indexPath.item]
+            let model : AnchorModel = recommendVM.anchorGroups[indexPath.section].anchors[indexPath.item]
+            
+//            print("item model =",model.nickname)
+            return cell
         }
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kNormalCellID, for: indexPath) as! CollectionNormalCell
+
+        // 2.给cell设置数据
         
+//        cell.anchor = baseVM.anchorGroups[indexPath.section].anchors[indexPath.item]
 //        cell.backgroundColor = UIColor.red
-        return cell
         
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: kHeaderViewID, for: indexPath)
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: kHeaderViewID, for: indexPath) as! CollectionHeaderView
 //        headerView.backgroundColor = UIColor.cyan
+        // 2.给HeaderView设置数据
+        headerView.group = recommendVM.anchorGroups[indexPath.section]
+
         return headerView
     }
     

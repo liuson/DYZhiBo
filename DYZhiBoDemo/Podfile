@@ -9,6 +9,9 @@ target 'DYZhiBoDemo' do
   # Pods for DYZhiBoDemo
 
     pod 'Alamofire'
+    pod 'Kingfisher'
+    
+    pod 'SwiftyJSON'
 
   target 'DYZhiBoDemoTests' do
     inherit! :search_paths

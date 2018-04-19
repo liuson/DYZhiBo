@@ -19,6 +19,11 @@
 		36339C54207B489B0090C717 /* CollectionPrettyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36339C52207B489B0090C717 /* CollectionPrettyCell.xib */; };
 		36339C56207B5B310090C717 /* NetworkTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36339C55207B5B310090C717 /* NetworkTools.swift */; };
 		36339C5A207B630D0090C717 /* ReCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36339C59207B630D0090C717 /* ReCommentViewModel.swift */; };
+		36760C1D207C51530021356F /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36760C1C207C51530021356F /* BaseViewModel.swift */; };
+		36760C1F207C517F0021356F /* BaseGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36760C1E207C517F0021356F /* BaseGameModel.swift */; };
+		36760C21207C52610021356F /* AnchorGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36760C20207C52610021356F /* AnchorGroup.swift */; };
+		36760C23207C53580021356F /* AnchorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36760C22207C53580021356F /* AnchorModel.swift */; };
+		36760C25207C55880021356F /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36760C24207C55880021356F /* NSDate+Extension.swift */; };
 		367D819120623AB00039DD90 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 367D818F20623AB00039DD90 /* Home.storyboard */; };
 		367D819320623AC80039DD90 /* Live.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 367D819220623AC80039DD90 /* Live.storyboard */; };
 		367D819620623ADC0039DD90 /* Follow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 367D819420623ADC0039DD90 /* Follow.storyboard */; };
@@ -69,6 +74,11 @@
 		36339C52207B489B0090C717 /* CollectionPrettyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionPrettyCell.xib; sourceTree = "<group>"; };
 		36339C55207B5B310090C717 /* NetworkTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTools.swift; sourceTree = "<group>"; };
 		36339C59207B630D0090C717 /* ReCommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReCommentViewModel.swift; sourceTree = "<group>"; };
+		36760C1C207C51530021356F /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		36760C1E207C517F0021356F /* BaseGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseGameModel.swift; sourceTree = "<group>"; };
+		36760C20207C52610021356F /* AnchorGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorGroup.swift; sourceTree = "<group>"; };
+		36760C22207C53580021356F /* AnchorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorModel.swift; sourceTree = "<group>"; };
+		36760C24207C55880021356F /* NSDate+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDate+Extension.swift"; sourceTree = "<group>"; };
 		367D819020623AB00039DD90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = DYZhiBoDemo/Classes/Main/Base.lproj/Home.storyboard; sourceTree = "<group>"; };
 		367D819220623AC80039DD90 /* Live.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Live.storyboard; sourceTree = "<group>"; };
 		367D819520623ADC0039DD90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = DYZhiBoDemo/Classes/Main/Base.lproj/Follow.storyboard; sourceTree = "<group>"; };
@@ -155,6 +165,9 @@
 		36339C4F207B48290090C717 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				36760C1E207C517F0021356F /* BaseGameModel.swift */,
+				36760C20207C52610021356F /* AnchorGroup.swift */,
+				36760C22207C53580021356F /* AnchorModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -182,11 +195,20 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		36760C1B207C51300021356F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				36760C1C207C51530021356F /* BaseViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		367D818E206236DC0039DD90 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				367D81BE206241C10039DD90 /* UIBarButtonItem+Extension.swift */,
 				36B04D3F2072282C00881F3D /* UIColor+Extension.swift */,
+				36760C24207C55880021356F /* NSDate+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -390,6 +412,7 @@
 			isa = PBXGroup;
 			children = (
 				36FE10CA204E7DB3003DE408 /* Main.storyboard */,
+				36760C1B207C51300021356F /* ViewModel */,
 				36339C50207B48290090C717 /* Controller */,
 				36339C4F207B48290090C717 /* Model */,
 				36BE3489207B47A500D28E9C /* View */,
@@ -584,10 +607,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-DYZhiBoDemo/Pods-DYZhiBoDemo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -639,9 +666,14 @@
 			files = (
 				36339C56207B5B310090C717 /* NetworkTools.swift in Sources */,
 				3607CE3E2074CC1100157CF2 /* CollectionHeaderView.swift in Sources */,
+				36760C23207C53580021356F /* AnchorModel.swift in Sources */,
 				367D81BF206241C10039DD90 /* UIBarButtonItem+Extension.swift in Sources */,
+				36760C25207C55880021356F /* NSDate+Extension.swift in Sources */,
 				36339C4E207B47FE0090C717 /* PageTitleView.swift in Sources */,
 				367D81C1206248C10039DD90 /* MineVController.swift in Sources */,
+				36760C1F207C517F0021356F /* BaseGameModel.swift in Sources */,
+				36760C21207C52610021356F /* AnchorGroup.swift in Sources */,
+				36760C1D207C51530021356F /* BaseViewModel.swift in Sources */,
 				36B04D402072282C00881F3D /* UIColor+Extension.swift in Sources */,
 				3607CE3B2074BF8C00157CF2 /* RecommentController.swift in Sources */,
 				36339C5A207B630D0090C717 /* ReCommentViewModel.swift in Sources */,
